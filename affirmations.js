@@ -319,7 +319,22 @@ function showPreviousAffirmation() {
   }
 }
 
+function updateVisitCounter() {
+  if (typeof Storage === "undefined") return; // no localStorage support[web:134]
+
+  const key = "visitCount_affirmations"; // unique key for this site
+  const current = Number(localStorage.getItem(key) || "0");
+  const next = current + 1;
+  localStorage.setItem(key, String(next));
+
+  const el = document.getElementById("visitCounter");
+  if (el) {
+    el.textContent = next;
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  updateVisitCounter();
   // first load: only current exists
   currentAffirmation = getRandomAffirmation();
   render(currentAffirmation);

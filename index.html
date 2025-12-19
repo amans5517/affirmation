@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <title>Affirmation</title>
+  <style>
+  #visitCounter {
+    position: fixed;        /* stick to viewport */        /* [web:141][web:132] */
+    right: 8px;
+    bottom: 4px;
+    font-size: 10px;
+    color: #555;
+    opacity: 0.4;           /* subtle / nearly invisible */
+    user-select: none;
+  }
+</style>
 </head>
 <body>
   <pre id="response"></pre>
@@ -10,6 +21,9 @@
   <button id="newAffirmationBtn">New affirmation 🔁</button>
   <button id="previousAffirmationBtn">Previous affirmation ⬅️</button>
 
+  <div id="visitCounter"></div>
+
   <script src="affirmations.js"></script>
+
 </body>
 </html>
