@@ -297,8 +297,7 @@ function render(affirmation) {
   const el = document.getElementById("response");
   el.textContent = JSON.stringify(
     {
-      affirmation,
-      timestamp: new Date().toISOString()
+      affirmation
     },
     null,
     2
