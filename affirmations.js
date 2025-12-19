@@ -295,6 +295,8 @@ function getRandomAffirmation() {
 
 function render(affirmation) {
   const el = document.getElementById("response");
+  if (!el) return;
+
   el.textContent = JSON.stringify(
     {
       affirmation
@@ -313,37 +315,42 @@ function showNewAffirmation() {
 function showPreviousAffirmation() {
   if (previousAffirmation) {
     render(previousAffirmation);
-  } else {
-    // optional: first-load case, nothing before
+  } else if (currentAffirmation) {
     render(currentAffirmation);
   }
 }
 
-function updateVisitCounter() {
-  if (typeof Storage === "undefined") return; // no localStorage support[web:134]
-
-  const key = "visitCount_affirmations"; // unique key for this site
-  const current = Number(localStorage.getItem(key) || "0");
-  const next = current + 1;
-  localStorage.setItem(key, String(next));
-
-  const el = document.getElementById("visitCounter");
-  if (el) {
-    el.textContent = next;
-  }
-}
+// function updateGlobalVisitCounter() {
+//   fetch("https://api.countapi.xyz/hit/amans-affirmations/site-visits")
+//     .then(res => res.json())
+//     .then(data => {
+//       const el = document.getElementById("visitCounterGlobal");
+//       console.log("visit counter response:", data); // debug
+//       if (el && data && typeof data.value === "number") {
+//         el.textContent = data.value;
+//       }
+//     })
+//     .catch(err => {
+//       console.error("visit counter error:", err);
+//     });
+// }
 
 document.addEventListener("DOMContentLoaded", () => {
-  updateVisitCounter();
   // first load: only current exists
   currentAffirmation = getRandomAffirmation();
   render(currentAffirmation);
 
-  document
-    .getElementById("newAffirmationBtn")
-    .addEventListener("click", showNewAffirmation);
+//   updateGlobalVisitCounter();
 
-  document
-    .getElementById("previousAffirmationBtn")
-    .addEventListener("click", showPreviousAffirmation);
+// button listeners
+  const newBtn = document.getElementById("newAffirmationBtn");
+  const prevBtn = document.getElementById("previousAffirmationBtn");
+
+  if (newBtn) {
+    newBtn.addEventListener("click", showNewAffirmation);
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", showPreviousAffirmation);
+  }
 });

@@ -3,17 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <title>Affirmation</title>
+
   <style>
-  #visitCounter {
-    position: fixed;        /* stick to viewport */        /* [web:141][web:132] */
-    right: 8px;
-    bottom: 4px;
-    font-size: 10px;
-    color: #555;
-    opacity: 0.4;           /* subtle / nearly invisible */
-    user-select: none;
-  }
-</style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #111;
+      color: #f9f9f9;
+      margin: 0;
+      padding: 16px;
+      min-height: 100vh;
+    }
+
+    #response {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 8px;
+      margin-right: 8px;
+      padding: 6px 10px;
+      font-size: 13px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+    }
+
+    #newAffirmationBtn {
+      background: #2e7d32;
+      color: #fff;
+    }
+
+    #previousAffirmationBtn {
+      background: #424242;
+      color: #fff;
+    }
+
+    /* bottom-right visit counter */
+    #visitCounterGlobal {
+      position: fixed;
+      right: 8px;
+      bottom: 4px;
+      opacity: 0.4;
+      user-select: none;
+      z-index: 9999;
+    }
+  </style>
 </head>
 <body>
   <pre id="response"></pre>
@@ -21,9 +57,13 @@
   <button id="newAffirmationBtn">New affirmation 🔁</button>
   <button id="previousAffirmationBtn">Previous affirmation ⬅️</button>
 
-  <div id="visitCounter"></div>
+  <!-- Global visit counter image (Option 1) -->
+  <img
+    id="visitCounterGlobal"
+    src="https://visitor-badge.laobi.icu/badge?page_id=amans5517.affirmation"
+    alt=""
+  />
 
   <script src="affirmations.js"></script>
-
 </body>
 </html>
